@@ -1,0 +1,219 @@
+{
+  "schema_version": 1,
+  "scope": "meigen_full_history",
+  "snapshot": {
+    "window": {
+      "start": "2026-08-12T21:24:36.457+08:00",
+      "end": "2026-09-16T07:10:00+00:00",
+      "timezone": "Asia/Shanghai"
+    },
+    "generation_id": "reviewed-20260916-1510-v2",
+    "status": "reviewed",
+    "claim_level": "observed_association"
+  },
+  "findings": [
+    {
+      "window": {
+        "start": "2026-08-12T21:24:36.457+08:00",
+        "end": "2026-09-16T07:10:00+00:00",
+        "timezone": "Asia/Shanghai"
+      },
+      "generation_id": "reviewed-20260916-1510-v2",
+      "status": "reviewed",
+      "claim_level": "observed_association",
+      "id": "MGH-01",
+      "title": "优先定位9月10日任务承接切换",
+      "observation": "相同商品视频video_en卡片与入口，9/3–9/9首次提交229/1745（13.12%），9/10–9/15为1/905（0.11%）；继续浏览/操作17.94%→20.22%。认证后原工具页返回0→89，Studio返回8→2。",
+      "interpretation": "行为差异定位在使用/认证承接，并非只有换卡片改变访客构成；原页工具执行或埋点替代与真实恢复问题需并行核查。",
+      "alternative_explanations": [
+        "原页工具产生了结果，但Studio发送事件不再覆盖。",
+        "素材或输入未恢复导致任务中断。",
+        "历史版本和任务意愿仍可能有其他变化。"
+      ],
+      "action": "回查9/10上午发布，复现素材→认证→原任务，修复恢复并统一原页与Studio任务结果事件。",
+      "validation_metric": "同需求auth→原任务开始/结果率；错误率、等待与重复输入为护栏。",
+      "confidence": "high",
+      "evidence": [
+        "branches_findings.md",
+        "snapshots/reviewed-20260916-1510/report.json"
+      ]
+    },
+    {
+      "window": {
+        "start": "2026-08-12T21:24:36.457+08:00",
+        "end": "2026-09-16T07:10:00+00:00",
+        "timezone": "Asia/Shanghai"
+      },
+      "generation_id": "reviewed-20260916-1510-v2",
+      "status": "reviewed",
+      "claim_level": "observed_association",
+      "id": "MGH-02",
+      "title": "优先复盘8月23日有效放量",
+      "observation": "8/22→8/23访问919→1117，使用访问102→144，比例11.10%→12.89%；9/13→9/14访问951→1279但使用9→7。",
+      "interpretation": "8/23更适合作为可重复推广动作的回查对象；9/14须先核验变化后的站内承接再扩大投入。",
+      "alternative_explanations": [
+        "周末结构和国家/语言分布影响。",
+        "9/10以后使用事件覆盖改变。"
+      ],
+      "action": "回查8/23卡片排序/曝光、9/14晚间新卡放量操作；小规模同期复现并看有效使用增量。",
+      "validation_metric": "每千入口注册后使用/下载；相同入口同周时段对照，流量与有效率并列。",
+      "confidence": "medium",
+      "evidence": [
+        "segments_findings.md",
+        "snapshots/reviewed-20260916-1510/report.json"
+      ]
+    },
+    {
+      "window": {
+        "start": "2026-08-12T21:24:36.457+08:00",
+        "end": "2026-09-16T07:10:00+00:00",
+        "timezone": "Asia/Shanghai"
+      },
+      "generation_id": "reviewed-20260916-1510-v2",
+      "status": "reviewed",
+      "claim_level": "observed_association",
+      "id": "MGH-03",
+      "title": "规模入口与商业需求分别推进",
+      "observation": "图片修复17486与商品视频9387次，占34363入口78.2%；商品视频贡献129/166主动付费意图及30/45结账。",
+      "interpretation": "优先优化修复的大规模开始路径、视频的结果预览和权益承接；不是两个工具效果的因果排名。",
+      "alternative_explanations": [
+        "两需求的付费意愿与任务成本不同。",
+        "工具执行与埋点时期不同。"
+      ],
+      "action": "两条移动端任务分别设计结果与继续动作，视频优先验证预览/导出权益。",
+      "validation_metric": "各自入口→任务开始→结果下载→交易；按产品时期分别比较。",
+      "confidence": "high",
+      "evidence": [
+        "segments_findings.md",
+        "snapshots/reviewed-20260916-1510/report.json"
+      ]
+    },
+    {
+      "window": {
+        "start": "2026-08-12T21:24:36.457+08:00",
+        "end": "2026-09-16T07:10:00+00:00",
+        "timezone": "Asia/Shanghai"
+      },
+      "generation_id": "reviewed-20260916-1510-v2",
+      "status": "reviewed",
+      "claim_level": "observed_association",
+      "id": "MGH-04",
+      "title": "把注册后立即续接原任务的体验复制出来",
+      "observation": "注册信号后2422/2741（88.36%）于30分钟内提交，中位约3.1秒；认证页起点1422/2467返回非认证页，486/2467提交。两类分母分别展示。",
+      "interpretation": "任务意图已准备好的注册续接有较高推进；认证页路线中的上下文恢复是具体优化对象。",
+      "alternative_explanations": [
+        "认证目的和已有账户状态不同。",
+        "原页工具使用未被send_message记录。"
+      ],
+      "action": "保留原页面/素材/输入，认证成功后定位原任务并提供明确下一步；不让用户重找CTA。",
+      "validation_metric": "认证后原任务恢复率与有效开始率，注册后使用率；输入丢失/错误为护栏。",
+      "confidence": "medium",
+      "evidence": [
+        "branches_findings.md",
+        "snapshots/reviewed-20260916-1510/report.json"
+      ]
+    },
+    {
+      "window": {
+        "start": "2026-08-12T21:24:36.457+08:00",
+        "end": "2026-09-16T07:10:00+00:00",
+        "timezone": "Asia/Shanghai"
+      },
+      "generation_id": "reviewed-20260916-1510-v2",
+      "status": "reviewed",
+      "claim_level": "observed_association",
+      "id": "MGH-05",
+      "title": "图片修复与视频采用不同的继续体验",
+      "observation": "首次5分钟重复使用后的第5–30分钟新意图：图片修复11/260（4.23%）vs未重复5/1323（0.38%）；商品视频18/233（7.73%）vs56/646（8.67%）。",
+      "interpretation": "支持验证修复结果的继续编辑/下一张；不支持把增加提交次数作为全任务共同付费机制。",
+      "alternative_explanations": [
+        "高原始意愿促成重复与付费意图。",
+        "重复可能是失败重试。",
+        "两任务处理耗时不同。"
+      ],
+      "action": "修复测试结果对比、调整强度、下一张；视频测试预览、输出规格及权益说明。",
+      "validation_metric": "结果/下载率、后续意图及支付；错误重试、处理成本和任务耗时为护栏。",
+      "confidence": "medium",
+      "evidence": [
+        "branches_findings.md",
+        "snapshots/reviewed-20260916-1510/report.json"
+      ]
+    },
+    {
+      "window": {
+        "start": "2026-08-12T21:24:36.457+08:00",
+        "end": "2026-09-16T07:10:00+00:00",
+        "timezone": "Asia/Shanghai"
+      },
+      "generation_id": "reviewed-20260916-1510-v2",
+      "status": "reviewed",
+      "claim_level": "observed_association",
+      "id": "MGH-06",
+      "title": "下载和预览位置承接拿走结果的意图",
+      "observation": "视频预览提示311个成熟访问后135出现主动意图、22结账；下载付费提示12个后4主动意图、3结账；首结果游客门槛16个后10注册。",
+      "interpretation": "结果附近是值得定向验证的权益说明位置；下载与首结果样本较小，不作全站效果外推。",
+      "alternative_explanations": [
+        "强原始下载意愿决定后续动作。",
+        "部分价格展示由系统自动打开。"
+      ],
+      "action": "说明付费后可获得的格式/清晰度，保留结果并支持结账返回下载；补结果和下载完成事件。",
+      "validation_metric": "预览/下载意图→确认支付→下载完成；退款、结果丢失及关闭率为护栏。",
+      "confidence": "medium",
+      "evidence": [
+        "branches_findings.md",
+        "snapshots/reviewed-20260916-1510/report.json"
+      ]
+    },
+    {
+      "window": {
+        "start": "2026-08-12T21:24:36.457+08:00",
+        "end": "2026-09-16T07:10:00+00:00",
+        "timezone": "Asia/Shanghai"
+      },
+      "generation_id": "reviewed-20260916-1510-v2",
+      "status": "reviewed",
+      "claim_level": "observed_association",
+      "id": "MGH-07",
+      "title": "首日有价值的第二次操作是回访实验候选",
+      "observation": "成熟7日账户中首24h1次提交者27/1783（1.51%）再次提交，2+次者24/649（3.70%）；同需求×周标准化1.57%vs3.87%，差2.31pp，95%近似区间0.64–3.97pp。",
+      "interpretation": "让用户容易继续编辑、比较并保留下次入口值得实验；不意味着强迫多次提交会造成留存增长。",
+      "alternative_explanations": [
+        "重复者原本任务更强或需求更多。",
+        "账号识别与旧时期覆盖存在选择。",
+        "首次反复操作可能是质量问题。"
+      ],
+      "action": "围绕结果加入继续修改、处理下一张和保存任务入口，随机比较7日再次有效使用。",
+      "validation_metric": "首24h注册后结果/下载、后7日新Visit有效任务；失败重试与操作成本为护栏。",
+      "confidence": "medium",
+      "evidence": [
+        "accounts/findings.md",
+        "snapshots/reviewed-20260916-1510/report.json"
+      ]
+    },
+    {
+      "window": {
+        "start": "2026-08-12T21:24:36.457+08:00",
+        "end": "2026-09-16T07:10:00+00:00",
+        "timezone": "Asia/Shanghai"
+      },
+      "generation_id": "reviewed-20260916-1510-v2",
+      "status": "reviewed",
+      "claim_level": "observed_association",
+      "id": "MGH-08",
+      "title": "补齐真实价值与付款闭环",
+      "observation": "全站41个purchase交易键未与MeiGen cohort关联；当前可测当次45结账、账户177付费意图。没有通用下载完成事件。",
+      "interpretation": "商业分析先用明确意图与结账定位问题，真实付款和注册后下载需补齐关联；不报告渠道真实支付率为0。",
+      "alternative_explanations": [
+        "支付采集或身份关联丢失。",
+        "用户在其他设备或未关联访问中付款。"
+      ],
+      "action": "服务端任务/下载与支付成功事件统一task_id/result_id/账户/交易键；明确订阅创建和试用转付费。",
+      "validation_metric": "成功结果→实际下载、已支付交易匹配率、试用到首次收费；交易唯一性和失败理由完整率。",
+      "confidence": "high",
+      "evidence": [
+        "accounts/findings.md",
+        "snapshots/reviewed-20260916-1510/report.json"
+      ]
+    }
+  ]
+}

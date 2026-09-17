@@ -1,0 +1,7 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {"label":"启动 MeiGen 动态服务","type":"process","command":"python3","args":["run.py","--port","8878"],"options":{"cwd":"${workspaceFolder}"},"presentation":{"reveal":"always","panel":"dedicated","focus":true},"problemMatcher":[]},
+    {"label":"检查 MeiGen MCP 连接","type":"process","command":"python3","args":["run.py","--check"],"options":{"cwd":"${workspaceFolder}"},"presentation":{"reveal":"always","panel":"dedicated","focus":true},"problemMatcher":[]}
+  ]
+}
