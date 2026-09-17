@@ -30,3 +30,9 @@
 .refresh-progress{display:block;font-size:10px;color:#8a8a93;white-space:normal;max-width:270px;margin-top:4px}.data-status{max-width:330px}.daily-journey-table{min-width:1060px}.daily-journey-table .daily-date{position:sticky;left:0;background:white;z-index:1;min-width:88px}.daily-journey-table th.daily-date{background:#fcfcfd}.daily-journey-table td{white-space:nowrap}.daily-journey-table td small{font-size:9px}.filter-actions{flex-wrap:wrap}
 .analysis-tabs{display:inline-flex;margin:0 0 18px;background:#f0f1f3;padding:4px}.analysis-tabs button{padding:7px 15px;font-size:12px}
 .strategy-card .stat-strip{margin:0 22px 20px}.strategy-table{min-width:780px}.strategy-card .action-card p{line-height:1.85}.strategy-card .action-card h4{margin:14px 0 4px}.strategy-card .action-card h4:first-child{margin-top:0}
+
+/* 简洁展示：数据与交互保留，移除辅助说明文字。 */
+.topbar-right,.page-footer,.sidebar-bottom small{display:none!important}
+.card-head p,.section-heading p,.node-detail-head p{display:none!important}
+.note-row,.flow-note,.chart-caption,.matrix-caption,.details-note,.data-explainer,.mini-note{display:none!important}
+.snapshot-mode .sidebar-bottom,.snapshot-mode .status-label{display:none!important}
