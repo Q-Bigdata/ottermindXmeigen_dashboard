@@ -25,6 +25,11 @@ import uuid
 from urllib.parse import unquote, urlparse
 from zoneinfo import ZoneInfo
 
+try:
+    from source_freshness import check as check_source_freshness
+except ImportError:  # pragma: no cover - cached/static installations may omit MCP code
+    check_source_freshness = None
+
 UTC = timezone.utc
 MAX_REQUEST_BYTES = 4096
 PHASE_LABELS = {
@@ -139,6 +144,8 @@ class RefreshManager:
         self.next_auto_at = utc_now() + timedelta(seconds=auto_interval_seconds) if self.settings["auto_enabled"] else None
         self._scheduler_stop = threading.Event()
         self.scheduler = threading.Thread(target=self._schedule, daemon=True, name="meigen-auto-refresh")
+        self.freshness = {"state": "unavailable", "reason": "not_checked", "checked_at": None}
+        self._freshness_checked_monotonic = 0.0
         self.scheduler.start()
 
     def _schedule(self) -> None:
@@ -207,15 +214,28 @@ class RefreshManager:
         with self.lock:
             self._read_progress()
             report = self.cache_metadata()
+            now_monotonic = time.monotonic()
+            if check_source_freshness and now_monotonic - self._freshness_checked_monotonic >= 60:
+                self._freshness_checked_monotonic = now_monotonic
+                checker = threading.Thread(target=self._refresh_freshness, daemon=True, name="meigen-source-freshness")
+                checker.start()
             refresh = json.loads(json.dumps(self.refresh))
             if refresh["state"] in {"running", "cancelling"} and self._started_monotonic is not None:
                 refresh["elapsed_seconds"] = max(0, int(time.monotonic() - self._started_monotonic))
             return {"server_time": iso_utc(utc_now()), "refresh": refresh, "report": report,
                     "settings": self.get_settings(),
+                    "source_freshness": json.loads(json.dumps(self.freshness)),
                     "serving_previous_report": bool(report["available"] and refresh["state"] in {"running", "cancelling", "cancelled", "failed"}),
                     "refresh_policy": {"default_cutoff_lag_seconds": self.cutoff_lag_seconds,
                                        "suggested_ui_interval_seconds": self.auto_interval_seconds,
                                        "automatic_server_schedule": True, "timeout_seconds": self.timeout_seconds}}
+
+    def _refresh_freshness(self) -> None:
+        if not check_source_freshness:
+            return
+        result = check_source_freshness()
+        with self.lock:
+            self.freshness = result
 
     def _audit(self, event: str, **extra) -> None:
         # Safe fixed fields only: never URLs, environment, SQL, or runner output.
